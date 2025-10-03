@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Leonel Manolio — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f10;
+      --panel: #1a1a1b;
+      --crema: #e9dfd6;
+      --borgo: #6b1020;
+      --muted: #b6b0a8;
+      --max-w: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--crema);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      line-height: 1.5;
+    }
+
+    main {
+      width: 100%
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 6rem 1.5rem;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 20px 20px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      animation: heroFadeIn 2s ease-in-out 1.5s forwards
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4
+    }
+
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .grain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.25;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="6"><rect width="6" height="6" fill="%230f0f10"/><circle cx="3" cy="3" r="1" fill="%231a1a1b"/></svg>');
+      mix-blend-mode: overlay;
+      z-index: 2
+    }
+
+    .site-title {
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 0.03em;
+      font-size: clamp(36px, 9vw, 96px);
+      line-height: 0.9;
+      color: var(--crema);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      text-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 3
+    }
+
+    .tagline {
+      font-family: Inter, system-ui;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      font-size: 1.05rem;
+      position: relative;
+      z-index: 3
+    }
+
+    .burn {
+      position: absolute;
+      right: -20%;
+      top: -10%;
+      width: 60%;
+      height: 60%;
+      background: linear-gradient(90deg, rgba(107, 16, 32, 0.06), transparent 30%);
+      transform: rotate(-12deg);
+      filter: blur(22px);
+      opacity: 0.6;
+      mix-blend-mode: soft-light
+    }
+
+    section {
+      padding: 6.5rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.02)
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto
+    }
+
+    h2 {
+      font-family: 'Playfair Display';
+      font-size: 2rem;
+      color: var(--crema);
+      margin-bottom: 1rem
+    }
+
+    p.lead {
+      color: var(--muted);
+      max-width: 70ch
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center
+    }
+
+    @media(min-width:880px) {
+      .row {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.00));
+      padding: 1.1rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.03)
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    .section-intro {
+      margin-bottom: 1.5rem
+    }
+
+    .cta {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      font-weight: 600
+    }
+
+    .contact-box {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem
+    }
+
+    .contact-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap
+    }
+
+    .pill {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 0.6rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      font-weight: 600
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUp 800ms ease forwards
+    }
+
+    .delay-1 {
+      animation-delay: 180ms
+    }
+
+    .delay-2 {
+      animation-delay: 320ms
+    }
+
+    .delay-3 {
+      animation-delay: 480ms
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .nav-fixed {
+      position: fixed;
+      left: 1rem;
+      top: 1rem;
+      z-index: 50;
+      background: transparent
+    }
+
+    .nav-fixed a {
+      display: inline-block;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(4px)
+    }
+
+    .scroll-ind {
+      position: absolute;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      font-size: 0.86rem;
+      color: var(--muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px
+    }
+
+    .mouse {
+      width: 24px;
+      height: 36px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 6px
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.06);
+      animation: scrollDot 1.6s infinite
+    }
+
+    @keyframes scrollDot {
+      0% {
+        transform: translateY(0);
+        opacity: 0.6
+      }
+
+      50% {
+        transform: translateY(10px);
+        opacity: 1
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 0.6
+      }
+    }
+
+    .accent {
+      color: var(--borgo)
+    }
+
+    .muted-block {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent);
+      padding: 1rem;
+      border-radius: 8px
+    }
+
+    /* Video carousel */
+    .video-carousel {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      margin: 2rem auto;
+      overflow: hidden
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      aspect-ratio: 16/9
+    }
+
+    .carousel-slide iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--crema);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: all 0.2s
+    }
+
+    .carousel-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: rgba(255, 255, 255, 0.2)
+    }
+
+    .carousel-btn.prev {
+      left: 10px
+    }
+
+    .carousel-btn.next {
+      right: 10px
+    }
+
+    .project-box {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.00));
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      margin-top: 2rem
+    }
+
+    .project-title {
+      font-family: 'Playfair Display';
+      font-size: 1.5rem;
+      color: var(--crema);
+      margin-bottom: 0.5rem;
+      text-align: center
+    }
+
+    /* Bento box for music */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem
+    }
+
+    .bento-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      background: rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, border-color 0.3s
+    }
+
+    .bento-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.1)
+    }
+
+    .bento-item iframe {
+      width: 100%;
+      height: 352px;
+      border: none;
+      border-radius: 12px
+    }
+
+    .bento-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem
+    }
+
+    .bento-header h3 {
+      font-family: 'Playfair Display';
+      font-size: 1.5rem;
+      margin: 0
+    }
+
+    .bento-link {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: color 0.2s
+    }
+
+    .bento-link:hover {
+      color: var(--crema)
+    }
+
+    /* Tags for venues and artists */
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.5rem
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      transition: all 0.2s
+    }
+
+    .tag:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: var(--crema)
+    }
+
+    .section-subsection {
+      margin-top: 3rem
+    }
+
+    /* Full-width photo placeholder */
+    .full-image {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .full-image img {
+      width: 100%;
+      height: 110%;
+      object-fit: cover;
+      object-position: right top; /* Posición por defecto: Derecha */
+      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      transform: translateY(0);
+      will-change: transform
+    }
+
+    /* caption on top of image, subtle */
+    .photo-caption {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Playfair Display';
+      font-size: clamp(24px, 4vw, 40px);
+      color: var(--crema);
+      text-align: center;
+      opacity: 0.95;
+      padding: 0 1rem;
+      letter-spacing: 0.02em;
+      font-weight: 700
+    }
+
+    @media(max-width:480px) {
+      .photo-caption {
+        font-size: 24px;
+        font-weight: 700
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav-fixed">
+    <a href="#about">Sobre mí</a>
+    <a href="#streaming" style="margin-left:8px">Streaming</a>
+    <a href="#musica" style="margin-left:8px">Música</a>
+    <a href="#audio" style="margin-left:8px">Audio & Live</a>
+  </div>
+
+  <main>
+    <header class="hero">
+      <div class="hero-bg">
+        <img src="assets/images/hero-background.jpg" alt="">
+      </div>
+      <div class="burn"></div>
+      <div class="grain"></div>
+      <div style="position:relative;z-index:3">
+        <h1 class="site-title fade-up delay-1">LEONEL MANOLIO.</h1>
+        <p class="tagline fade-up delay-2">No hago ruido. <br>Lo esculpo.</p>
+      </div>
+      <div class="scroll-ind">
+        <div class="mouse">
+          <div class="dot"></div>
+        </div>
+        <div class="muted">scroll</div>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-intro">
+          <h2>Sobre mí</h2>
+          <p class="lead muted">Mi nombre es Leonel Manolio, también conocido como Naim LM. No vengo de academias ni
+            manuales—aprendí solo, desde chico, cuando soñaba con dedicarme al entretenimiento y la música. Aprendí a
+            escuchar hasta el silencio y a traducirlo en algo que valga la pena.</p>
+          <p class="lead muted" style="margin-top:1rem">Hoy trabajo como operador de sonido para músicos y bandas en
+            eventos de Buenos Aires, dirijo el stream de "La Casita del Árbol de Juana Teatro Restobar", y produzco,
+            mezclo y masterizo de manera freelance. Todo lo que hago busca transformar ideas en experiencias
+            audiovisuales.</p>
+        </div>
+        <div class="row">
+          <div class="card">
+            <h3 style="font-family:'Playfair Display';margin-bottom:0.6rem">Filosofía</h3>
+            <p class="muted">Cada proyecto es un experimento. Me la juego probando técnicas, herramientas y enfoques
+              nuevos para llevar mi trabajo al nivel de los estudios más grandes, incluso siendo un one man team.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-family:'Playfair Display';margin-bottom:0.6rem">Herramientas</h3>
+            <p class="muted">FL Studio, OBS + plug-ins, vMix, Zara Radio, suites de FabFilter y Waves, Adobe Photoshop,
+              Premiere, After Effects, integración de material generado con IA.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="streaming">
+      <div class="container">
+        <h2>Streaming</h2>
+        <p class="lead muted">Diseño experiencias en vivo: manejo de cámaras, mezcla, monitoreo, overlays, producción
+          creativa y técnica de contenido (tanto entretenimiento como publicitario.)</p>
+
+        <div class="project-box">
+          <h3 class="project-title">LA CASITA DEL ÁRBOL — Juana Teatro Restobar</h3>
+          <p class="muted" style="text-align:center;margin-bottom:1.5rem">20 de agosto - actualidad.<br>Dirección y
+            operación del programa. Manejo de OBS (Open Broadcaster System), cámaras, sonido, overlays y diseño gráfico.
+          </p>
+
+          <div class="video-carousel">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide">
+                <iframe src="https://www.youtube.com/embed/PTmCgTnzO6A"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+              </div>
+              <div class="carousel-slide">
+                <iframe src="https://www.youtube.com/embed/4tHjOTNw0fE"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+              </div>
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel(-1)">‹</button>
+            <button class="carousel-btn next" onclick="moveCarousel(1)">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="full-image">
+      <img src="assets/images/headphones.png" alt="Auriculares en show">
+      <div class="photo-caption">donde el ruido se vuelve arte</div>
+    </section>
+
+    <section id="musica">
+      <div class="container">
+        <h2>Música</h2>
+        <p class="lead muted">Beats, canciones, texturas. La música que hago no está pensada para llenar espacio. Está
+          hecha para ocuparlo.</p>
+        <div class="row" style="margin-top:2rem">
+          <div class="card">
+            <h3 style="font-family:'Playfair Display';margin-bottom:0.6rem">Composición</h3>
+            <p class="muted">Desde la lírica hasta la melodía. Cada palabra y cada nota tienen intención. Compongo
+              canciones completas que cuentan algo real.</p>
+          </div>
+          <div class="card">
+            <h3 style="font-family:'Playfair Display';margin-bottom:0.6rem">Diseño de Sonido</h3>
+            <p class="muted">Construcción de atmósferas, texturas y elementos sonoros únicos. Cada proyecto tiene su
+              identidad y su firma.</p>
+          </div>
+        </div>
+
+        <div style="margin-top:4rem">
+          <div class="bento-header">
+            <h3>Naim LM</h3>
+            <a href="https://www.youtube.com/channel/UCHb-FcgaU-Q2UMfrH6MCDCg" target="_blank" class="bento-link">Ver
+              canal completo →</a>
+          </div>
+          <p class="muted" style="margin-bottom:1.5rem">Mi lado artista. Canciones, beats y todo lo que nace desde
+            adentro.</p>
+          <div class="bento-grid">
+            <div class="bento-item">
+              <iframe src="https://open.spotify.com/embed/album/0UuWXpgxvfF4k7qel0DOXi" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div class="bento-item">
+              <iframe src="https://open.spotify.com/embed/album/0vdcxB46rRhu3B78QFn95M" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div class="bento-item">
+              <iframe src="https://open.spotify.com/embed/album/2Tx5IwpWv4ryzdc3JrQaVJ" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div class="bento-item">
+              <iframe src="https://open.spotify.com/embed/album/6Yx6mRVjlHXqjSlAIdvrui" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:4rem">
+          <div class="bento-header">
+            <h3>Producciones</h3>
+          </div>
+          <p class="muted" style="margin-bottom:1.5rem">Trabajos para otros artistas. Donde pongo mi sonido al servicio
+            de otras visiones.</p>
+          <div class="bento-grid">
+            <div class="bento-item">
+              <iframe src="https://open.spotify.com/embed/album/5PQl3Nymk1RR5Tl6jrPAOY" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div class="bento-item">
+              <iframe src="https://open.spotify.com/embed/album/62j9wWRYMJy5Ww1irLiWCk" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div class="bento-item">
+              <iframe src="https://open.spotify.com/embed/album/1ee49IgzExvLF4mOP4ByWa" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+            <div class="bento-item">
+              <iframe src="https://open.spotify.com/embed/track/7bQPH6jdcNoFBTX73rp4gE" allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="full-image">
+      <img src="assets/images/studio-to-stage.jpg" alt="Del estudio al escenario">
+      <div class="photo-caption">del estudio al escenario</div>
+    </section>
+
+    <section id="audio">
+      <div class="container">
+        <h2>Audio & Live</h2>
+        <p class="lead muted">Sonidista en vivo: seteo tanto bandas completas, como pistas y voz con o sin autotune y efectos, corista/voz de apoyo y voz
+          principal. Desde la sala más chica hasta el escenario más grande, mi trabajo es que cada sonido tenga el peso
+          que merece.</p>
+
+        <div class="section-subsection">
+          <h3 style="font-family:'Playfair Display';font-size:1.5rem;margin-bottom:0.75rem">Venues & Eventos</h3>
+          <p class="muted">Lugares donde dejé mi huella sonora.</p>
+          <div class="tags-container">
+            <div class="tag">Auditorio Oeste - Apertura J Rei</div>
+            <div class="tag">Palermo Groove - Fiesta Calor</div>
+            <div class="tag">Niceto (lado B)</div>
+            <div class="tag">Makena</div>
+            <div class="tag">CCP Moreno</div>
+            <div class="tag">Plaza municipal de Morón</div>
+            <div class="tag">Plaza del Vagón - West Food</div>
+            <div class="tag">Temple Leloir - Perreología</div>
+            <div class="tag">Pompeya Ramos Mejía - Good Fellas</div>
+            <div class="tag">Pompeya Leloir - Feria Lupita</div>
+            <div class="tag">Antezana 247 la mansión</div>
+            <div class="tag">FX Dembow</div>
+            <div class="tag">South Side Sessions</div>
+            <div class="tag">Espacio Cultural Laberinto Morón - La Criu</div>
+            <div class="tag">Morón Músic Factory - Kunka Festival</div>
+            <div class="tag">La Sala Loud Bar (Ex music factory)</div>
+            <div class="tag">La Cucha Bar</div>
+            <div class="tag">Juana Teatro Restobar - La Wesay by Dadda Mobb</div>
+          </div>
+        </div>
+
+        <div class="section-subsection">
+          <h3 style="font-family:'Playfair Display';font-size:1.5rem;margin-bottom:0.75rem">Artistas</h3>
+          <p class="muted">Con quienes compartí escenario.</p>
+          <div class="tags-container">
+            <div class="tag">Flava</div>
+            <div class="tag">Big Val</div>
+            <div class="tag">MR Cumbia de la Piola (full band)</div>
+            <div class="tag">Artrox</div>
+            <div class="tag">Motta WS</div>
+            <div class="tag">Bran Saints</div>
+            <div class="tag">Tate YS</div>
+            <div class="tag">Numboy</div>
+            <div class="tag">Maaic</div>
+            <div class="tag">Quintana</div>
+            <div class="tag">Wise</div>
+            <div class="tag">J Oute</div>
+            <div class="tag">Agus Gaviola</div>
+            <div class="tag">Lea DG</div>
+            <div class="tag">Chainna</div>
+            <div class="tag">Tekaboys</div>
+            <div class="tag">Nikze</div>
+            <div class="tag">Big Duck</div>
+            <div class="tag">G Owen</div>
+            <div class="tag">Raymond Rich</div>
+            <div class="tag">Liu</div>
+            <div class="tag">Varone</div>
+            <div class="tag">Lowny</div>
+            <div class="tag">Leandro el favorito (full band)</div>
+            <div class="tag">Zatta</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="full-image"><img src="assets/images/final.jpg" alt="Transición" style="object-position: left top;"></section>
+
+    <section id="contact">
+      <div class="container">
+        <h2>Hablemos</h2>
+        <div class="contact-box">
+          <p class="muted">Proyectos, ideas o locuras. Todo empieza con un mensaje.</p>
+          <div class="contact-row">
+            <a class="pill" href="mailto:manolio96@gmail.com">manolio96@gmail.com</a>
+            <a class="pill" href="https://instagram.com/manoliooooo" target="_blank">@manoliooooo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer style="padding:3rem 1.5rem 6rem;color:var(--muted);text-align:center">
+      <div class="container">© Leonel Manolio — Diseñado para sonar mejor que la competencia.</div>
+    </footer>
+  </main>
+
+  <script>
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {e.target.classList.add('fade-up')}
+      })
+    }, {threshold: 0.12})
+    document.querySelectorAll('h2, .card, .site-title, .tagline, .lead').forEach(el => obs.observe(el))
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) target.scrollIntoView({behavior: 'smooth'});
+        }
+      })
+    })
+
+    // Carousel
+    let currentSlide = 0;
+    function moveCarousel(direction) {
+      const track = document.getElementById('carouselTrack');
+      const slides = track.querySelectorAll('.carousel-slide');
+      currentSlide = (currentSlide + direction + slides.length) % slides.length;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    // Parallax effect for full-image sections
+    const parallaxImages = document.querySelectorAll('.full-image img');
+    window.addEventListener('scroll', () => {
+      parallaxImages.forEach(img => {
+        const section = img.closest('.full-image');
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // Only apply parallax when section is in viewport
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          const scrolled = (windowHeight - rect.top) / (windowHeight + rect.height);
+          const yPos = scrolled * 15; // Subtle parallax factor
+          img.style.transform = `translateY(${yPos}%)`;
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
